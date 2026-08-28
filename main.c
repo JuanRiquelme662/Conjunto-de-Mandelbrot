@@ -33,6 +33,36 @@ void mandlebrot_serial(){
 
 }
 
-int main(){
+int main(int argc, char *argv[]) {
+    //valida para ver se a quantidade de argumentos e valida
+    if (argc != 5) {
+        fprintf(stderr, "Uso: %s largura altura max_iteracoes num_threads\n", argv[0]);
+        return 1;
+    }
+
+    int largura = atoi(argv[1]);
+    int altura = atoi(argv[2]);
+    int max_num_interacoes = atoi(argv[3]);
+    int num_threads = atoi(argv[4]);
+
+    if (largura <= 0 || altura <= 0 || max_num_interacoes <= 0 || num_threads <= 0) {
+        fprintf(stderr, "Erro: parâmetros devem ser inteiros positivos\n");
+        return 1;
+    }
+    //unsigned char nao tem sinal, sou seja vai de 0 a 255, justamente os valores RGB
+    unsigned char *pixels = malloc(largura * altura * sizeof(unsigned char));
+    if (pixels == NULL) {
+        fprintf(stderr, "Erro: falha ao alocar memória\n");
+        return 1;
+    }
+
+    mandelbrot_serial(pixels, largura, altura, max_num_interacoes);
+
+    if (!save_pgm("mandelbrot_login_serial.pgm", pixels, largura, altura)) {
+        free(pixels);
+        return 1;
+    }
+
+    free(pixels);
     return 0;
 }
