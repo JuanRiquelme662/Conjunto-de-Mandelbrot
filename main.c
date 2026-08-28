@@ -1,11 +1,10 @@
-
-
-
+#include <stdio.h>
+#include <stdlib.h>
 
 
 //a linha abaixo e o necessario para virar opemmp, mas vou ver isso melhor amanha
 //#pragma omp parallel for num_threads(num_threads)
-void mandlebrot_serial(){
+void mandelbrot_serial(unsigned char *pixels, int largura, int altura, int max_num_interacoes){
     for(int linha = 0; linha < altura; linha++){
         for(int coluna = 0; coluna < largura; coluna++){
 
@@ -27,10 +26,33 @@ void mandlebrot_serial(){
                 num_interacoes++;
 
             }
-
+            unsigned char intensidade = (unsigned char)((num_interacoes / (double)max_num_interacoes) * 255);
+            pixels[linha * largura + coluna] = intensidade;
         }
     }
 
+}
+mandelbrot_openmp(unsigned char *pixels, int largura, int altura, int max_num_interacoes){
+    
+}
+
+//funcao responsavel por salvar o resultado dos calculos em um arquivo real
+int save_pgm(const char *filename, unsigned char *pixels, int largura, int altura) {
+    FILE *f = fopen(filename, "w");
+    if (f == NULL) {
+        fprintf(stderr, "Erro: falha ao criar o arquivo %s\n", filename);
+        return 0; // falhou
+    }
+
+    for (int linha = 0; linha < altura; linha++) {
+        for (int coluna = 0; coluna < largura; coluna++) {
+            fprintf(f, "%d ", pixels[linha * largura + coluna]);
+        }
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+    return 1; // sucesso
 }
 
 int main(int argc, char *argv[]) {
