@@ -10,8 +10,19 @@ typedef struct {
     int max_num_interacoes;
     int linha_inicio;   // primeira linha que essa thread calcula
     int linha_fim;       // até essa linha (exclusive)
+
 } ThreadArgs;
 
+//nova struct para tratar os thrads que vai funcionar dinamicamente
+//nesse caso os trheads terao um contador compartilhado para que saibam o proximo passo da execucao
+typedef struct {
+    unsigned char *pixels;
+    int largura;
+    int altura;
+    int max_num_interacoes;
+    int *proxima_linha;        // ponteiro pro contador compartilhado
+    pthread_mutex_t *mutex;    // ponteiro pro mutex compartilhado
+} ThreadArgs_Dinamico;
 //a linha abaixo e o necessario para virar opemmp, mas vou ver isso melhor amanha
 //#pragma omp parallel for num_threads(num_threads)
 void mandelbrot_serial(unsigned char *pixels, int largura, int altura, int max_num_interacoes){
@@ -92,6 +103,7 @@ int save_pgm(const char *filename, unsigned char *pixels, int largura, int altur
     return 1; // sucesso
 }
 
+//void* porque e um ponteiro generico (de qualquer tipo)
 void *calcula_bloco(void *arg) {
     ThreadArgs *args = (ThreadArgs *) arg;
 
