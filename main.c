@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <omp.h>
 #include <pthread.h>
+#include <time.h>
 
+//vou usar clock_gettime, porque so o clock mede o tempo da cpu
 typedef struct {
     unsigned char *pixels;
     int largura;
@@ -222,7 +224,6 @@ void mandelbrot_pthreads2(unsigned char *pixels, int largura, int altura, int ma
 }
 
 int main(int argc, char *argv[]) {
-    //valida para ver se a quantidade de argumentos e valida
     if (argc != 5) {
         fprintf(stderr, "Uso: %s largura altura max_iteracoes num_threads\n", argv[0]);
         return 1;
@@ -238,43 +239,76 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    //unsigned char nao tem sinal, sou seja vai de 0 a 255, justamente os valores RGB
+    //unsigned char nao tem sinal, sou seja vai de 0 a 255,
     unsigned char *pixels = malloc(largura * altura * sizeof(unsigned char));
     if (pixels == NULL) {
         fprintf(stderr, "Erro: falha ao alocar memória\n");
         return 1;
     }
 
-    // --- Serial ---
+    FILE *times_file = fopen("times.txt", "w");
+    if (times_file == NULL) {
+        fprintf(stderr, "Erro: falha ao criar times.txt\n");
+        free(pixels);
+        return 1;
+    }
+
+    struct timespec inicio, fim;
+    double tempo;
+
+    // ---Serial---
+    clock_gettime(CLOCK_MONOTONIC, &inicio);
     mandelbrot_serial(pixels, largura, altura, max_num_interacoes);
+    clock_gettime(CLOCK_MONOTONIC, &fim);
+    tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
+    fprintf(times_file, "Serial: %f segundos\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_serial.pgm", pixels, largura, altura)) {
         free(pixels);
+        fclose(times_file);
         return 1;
     }
 
-    // --- OpenMP ---
+    // ---OpenMP---
+    clock_gettime(CLOCK_MONOTONIC, &inicio);
     mandelbrot_openmp(pixels, largura, altura, max_num_interacoes, num_threads);
+    clock_gettime(CLOCK_MONOTONIC, &fim);
+    tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
+    fprintf(times_file, "OpenMP: %f segundos\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_openmp.pgm", pixels, largura, altura)) {
         free(pixels);
+        fclose(times_file);
         return 1;
-
     }
+
+    // ---Pthreads1---
+    clock_gettime(CLOCK_MONOTONIC, &inicio);
     mandelbrot_pthreads1(pixels, largura, altura, max_num_interacoes, num_threads);
+    clock_gettime(CLOCK_MONOTONIC, &fim);
+    tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
+    fprintf(times_file, "Pthreads1: %f segundos\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_pthreads1.pgm", pixels, largura, altura)) {
         free(pixels);
+        fclose(times_file);
         return 1;
     }
 
+    // ---Pthreads2---
+    clock_gettime(CLOCK_MONOTONIC, &inicio);
     mandelbrot_pthreads2(pixels, largura, altura, max_num_interacoes, num_threads);
+    clock_gettime(CLOCK_MONOTONIC, &fim);
+    tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
+    fprintf(times_file, "Pthreads2: %f segundos\n", tempo);
 
-        if (!save_pgm("mandelbrot_jrxs_pthreads2.pgm", pixels, largura, altura)) {
-            free(pixels);
+    if (!save_pgm("mandelbrot_jrxs_pthreads2.pgm", pixels, largura, altura)) {
+        free(pixels);
+        fclose(times_file);
         return 1;
     }
 
+    fclose(times_file);
     free(pixels);
     return 0;
 }
