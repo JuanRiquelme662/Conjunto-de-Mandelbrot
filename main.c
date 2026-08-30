@@ -1,6 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
+#include <pthread.h>
+
+typedef struct {
+    unsigned char *pixels;
+    int largura;
+    int altura;
+    int max_num_interacoes;
+    int linha_inicio;   // primeira linha que essa thread calcula
+    int linha_fim;       // até essa linha (exclusive)
+} ThreadArgs;
 
 //a linha abaixo e o necessario para virar opemmp, mas vou ver isso melhor amanha
 //#pragma omp parallel for num_threads(num_threads)
@@ -82,6 +92,57 @@ int save_pgm(const char *filename, unsigned char *pixels, int largura, int altur
     return 1; // sucesso
 }
 
+void *calcula_bloco(void *arg) {
+    ThreadArgs *args = (ThreadArgs *) arg;
+
+    for (int linha = args->linha_inicio; linha < args->linha_fim; linha++) {
+        for (int coluna = 0; coluna < args->largura; coluna++) {
+
+            double cr = -2.0 + (coluna / (double)(args->largura - 1)) * 3.0;
+            double ci = -1.5 + (linha / (double)(args->altura - 1)) * 3.0;
+
+            double zr = 0, zi = 0;
+            int num_interacoes = 0;
+
+            while (num_interacoes < args->max_num_interacoes && (zr*zr + zi*zi) <= 4) {
+                double zr_novo = zr*zr - zi*zi + cr;
+                double zi_novo = 2*zr*zi + ci;
+                zr = zr_novo;
+                zi = zi_novo;
+                num_interacoes++;
+            }
+
+            unsigned char intensidade = (unsigned char)((num_interacoes / (double)args->max_num_interacoes) * 255);
+            args->pixels[linha * args->largura + coluna] = intensidade;
+
+        }
+    }
+
+    return NULL;
+}
+
+void mandelbrot_pthreads1(unsigned char *pixels, int largura, int altura, int max_num_interacoes, int num_threads) {
+    pthread_t threads[num_threads];
+    ThreadArgs args[num_threads];
+
+    int linhas_por_thread = altura / num_threads;
+
+    for (int t = 0; t < num_threads; t++) {
+        args[t].pixels = pixels;
+        args[t].largura = largura;
+        args[t].altura = altura;
+        args[t].max_num_interacoes = max_num_interacoes;
+        args[t].linha_inicio = t * linhas_por_thread;
+        args[t].linha_fim = (t == num_threads - 1) ? altura : (t + 1) * linhas_por_thread;
+
+        pthread_create(&threads[t], NULL, calcula_bloco, &args[t]);
+    }
+
+    for (int t = 0; t < num_threads; t++) {
+        pthread_join(threads[t], NULL);
+    }
+}
+
 int main(int argc, char *argv[]) {
     //valida para ver se a quantidade de argumentos e valida
     if (argc != 5) {
@@ -118,6 +179,13 @@ int main(int argc, char *argv[]) {
     mandelbrot_openmp(pixels, largura, altura, max_num_interacoes, num_threads);
 
     if (!save_pgm("mandelbrot_jrxs_openmp.pgm", pixels, largura, altura)) {
+        free(pixels);
+        return 1;
+
+    }
+    mandelbrot_pthreads1(pixels, largura, altura, max_num_interacoes, num_threads);
+
+    if (!save_pgm("mandelbrot_jrxs_pthreads1.pgm", pixels, largura, altura)) {
         free(pixels);
         return 1;
     }
