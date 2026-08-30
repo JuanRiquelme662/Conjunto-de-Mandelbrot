@@ -8,8 +8,8 @@ typedef struct {
     int largura;
     int altura;
     int max_num_interacoes;
-    int linha_inicio;   // primeira linha que essa thread calcula
-    int linha_fim;       // até essa linha (exclusive)
+    int linha_inicio;   
+    int linha_fim;      
 
 } ThreadArgs;
 
@@ -20,8 +20,9 @@ typedef struct {
     int largura;
     int altura;
     int max_num_interacoes;
-    int *proxima_linha;        // ponteiro pro contador compartilhado
-    pthread_mutex_t *mutex;    // ponteiro pro mutex compartilhado
+    int *proxima_linha;        
+    //mutex serve para nao deixar duas threads mexerem no mesmo lugar ao mesmo tempo
+    pthread_mutex_t *mutex;    
 } ThreadArgs_Dinamico;
 //a linha abaixo e o necessario para virar opemmp, mas vou ver isso melhor amanha
 //#pragma omp parallel for num_threads(num_threads)
@@ -155,6 +156,71 @@ void mandelbrot_pthreads1(unsigned char *pixels, int largura, int altura, int ma
     }
 }
 
+void *calcula_dinamico(void *arg) {
+    ThreadArgs_Dinamico *args = (ThreadArgs_Dinamico *) arg;
+
+    while (1) {
+        pthread_mutex_lock(args->mutex);
+        int linha = *(args->proxima_linha);
+        (*(args->proxima_linha))++;
+        pthread_mutex_unlock(args->mutex);
+
+        if (linha >= args->altura) {
+            break;
+        }
+
+        // AQUI: só o for de COLUNA, usando a "linha" que já veio do contador
+        for (int coluna = 0; coluna < args->largura; coluna++) {
+
+            double cr = -2.0 + (coluna / (double)(args->largura - 1)) * 3.0;
+            double ci = -1.5 + (linha / (double)(args->altura - 1)) * 3.0;
+
+            double zr = 0, zi = 0;
+            int num_interacoes = 0;
+
+            while (num_interacoes < args->max_num_interacoes && (zr*zr + zi*zi) <= 4) {
+                double zr_novo = zr*zr - zi*zi + cr;
+                double zi_novo = 2*zr*zi + ci;
+                zr = zr_novo;
+                zi = zi_novo;
+                num_interacoes++;
+            }
+
+            unsigned char intensidade = (unsigned char)((num_interacoes / (double)args->max_num_interacoes) * 255);
+            args->pixels[linha * args->largura + coluna] = intensidade;
+        }
+    }
+
+    return NULL;
+}
+
+void mandelbrot_pthreads2(unsigned char *pixels, int largura, int altura, int max_num_interacoes, int num_threads) {
+    pthread_t threads[num_threads];
+    ThreadArgs_Dinamico args[num_threads];
+
+    //encrementa o contador compartilhado
+    int proxima_linha = 0;               
+    pthread_mutex_t mutex;
+    pthread_mutex_init(&mutex, NULL);    
+
+    for (int t = 0; t < num_threads; t++) {
+        args[t].pixels = pixels;
+        args[t].largura = largura;
+        args[t].altura = altura;
+        args[t].max_num_interacoes = max_num_interacoes;
+        args[t].proxima_linha = &proxima_linha;   
+        args[t].mutex = &mutex;                   
+
+        pthread_create(&threads[t], NULL, calcula_dinamico, &args[t]);
+    }
+
+    for (int t = 0; t < num_threads; t++) {
+        pthread_join(threads[t], NULL);
+    }
+    //da como se fosse um free
+    pthread_mutex_destroy(&mutex);       
+}
+
 int main(int argc, char *argv[]) {
     //valida para ver se a quantidade de argumentos e valida
     if (argc != 5) {
@@ -199,6 +265,13 @@ int main(int argc, char *argv[]) {
 
     if (!save_pgm("mandelbrot_jrxs_pthreads1.pgm", pixels, largura, altura)) {
         free(pixels);
+        return 1;
+    }
+
+    mandelbrot_pthreads2(pixels, largura, altura, max_num_interacoes, num_threads);
+
+        if (!save_pgm("mandelbrot_jrxs_pthreads2.pgm", pixels, largura, altura)) {
+            free(pixels);
         return 1;
     }
 
