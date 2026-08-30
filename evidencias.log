@@ -805,4 +805,27 @@ Pthreads2: 0.023191 segundos
 [?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pont 4 4 50 1[27m./mandelbrot 4 4 50 1
 [?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot 4 4 50 1[27m./mandelbrot 4 4 50 1 1
 [?2004lUso: ./mandelbrot largura altura max_iteracoes num_threads
-[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunt
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjuntg-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot 4 4 50 1[27m./mandelbrot 4 4 50 1 1
+[?2004lUso: ./mandelbrot largura altura max_iteracoes num_threads
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7mgcc -fopenmp -lpthread main.c -o mandelbrot[27mgcc -fopenmp -lpthro-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7mgcc -fopenmp -lpthread main.c -o mandelbrot[27mgcc -fopenmp -lpthread main.c -o mandelbrot
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot 10ead main.c -o mandelbrot
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot 10x 10 50 2[27m./mandelbrot 10x 10 50 2
+[?2004lErro: largura inválida
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Usersx 10 50 2[27m./mandelbrot 10x 10 50 2
+[?2004lErro: largura inválida
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot -5 10 50 2[27m./mandelbrot -5 10 50 2
+[?2004lErro: largura inválida
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot -5 10 50 2[27m./mandelbrot -5 10 50 2
+[?2004lErro: largura inválida
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot abc 10 50 2[27m./mandelbrot abc 10 50 2
+[?2004lErro: largura inválidade-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot abc 10 50 2[27m./mandelbrot abc 10 50 2
+[?2004lErro: largura inválida
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot 10 10 50 2[27m
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot 10 10 50 2[27m./mandelbrot 10 10 50 2
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot./mandelbrot 10 10 50 2
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7mcat times.txt[27mcat times.txt
+[?2004lSerial: 0.000016s
+OpenMP: 0.000187s
+Pthreads1: 0.000366s
+Pthreads2: 0.000256s
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC

@@ -149,8 +149,11 @@ void mandelbrot_pthreads1(unsigned char *pixels, int largura, int altura, int ma
         args[t].max_num_interacoes = max_num_interacoes;
         args[t].linha_inicio = t * linhas_por_thread;
         args[t].linha_fim = (t == num_threads - 1) ? altura : (t + 1) * linhas_por_thread;
-
-        pthread_create(&threads[t], NULL, calcula_bloco, &args[t]);
+        //checagem para ver se athread foi criada corretamente caso contrario o programa retorna erro
+        if (pthread_create(&threads[t], NULL, calcula_bloco, &args[t]) != 0) {
+            fprintf(stderr, "Erro: falha na criação de thread\n");
+            exit(1);
+        }
     }
 
     for (int t = 0; t < num_threads; t++) {
@@ -203,7 +206,10 @@ void mandelbrot_pthreads2(unsigned char *pixels, int largura, int altura, int ma
     //encrementa o contador compartilhado
     int proxima_linha = 0;               
     pthread_mutex_t mutex;
-    pthread_mutex_init(&mutex, NULL);    
+    if (pthread_mutex_init(&mutex, NULL) != 0) {
+        fprintf(stderr, "Erro: falha na inicialização do mutex\n");
+        exit(1);
+    }    
 
     for (int t = 0; t < num_threads; t++) {
         args[t].pixels = pixels;
@@ -213,7 +219,10 @@ void mandelbrot_pthreads2(unsigned char *pixels, int largura, int altura, int ma
         args[t].proxima_linha = &proxima_linha;   
         args[t].mutex = &mutex;                   
 
-        pthread_create(&threads[t], NULL, calcula_dinamico, &args[t]);
+        if (pthread_create(&threads[t], NULL, calcula_dinamico, &args[t]) != 0) {
+            fprintf(stderr, "Erro: falha na criação de thread\n");
+            exit(1);
+        }
     }
 
     for (int t = 0; t < num_threads; t++) {
@@ -229,15 +238,36 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    int largura = atoi(argv[1]);
-    int altura = atoi(argv[2]);
-    int max_num_interacoes = atoi(argv[3]);
-    int num_threads = atoi(argv[4]);
+    //validacao da conversao, atoi nao tem como dizer que a conversao falhou sendo sucetivel a erros
+    char *endptr;
 
-    if (largura <= 0 || altura <= 0 || max_num_interacoes <= 0 || num_threads <= 0) {
-        fprintf(stderr, "Erro: parâmetros devem ser inteiros positivos\n");
+    long largura_long = strtol(argv[1], &endptr, 10);
+    if (*endptr != '\0' || largura_long <= 0) {
+        fprintf(stderr, "Erro: largura inválida\n");
         return 1;
     }
+    int largura = (int) largura_long;
+
+    long altura_long = strtol(argv[2], &endptr, 10);
+    if (*endptr != '\0' || altura_long <= 0) {
+        fprintf(stderr, "Erro: altura inválida\n");
+        return 1;
+    }
+    int altura = (int) altura_long;
+
+    long max_iter_long = strtol(argv[3], &endptr, 10);
+    if (*endptr != '\0' || max_iter_long <= 0) {
+        fprintf(stderr, "Erro: número máximo de iterações inválido\n");
+        return 1;
+    }
+    int max_num_interacoes = (int) max_iter_long;
+
+    long threads_long = strtol(argv[4], &endptr, 10);
+    if (*endptr != '\0' || threads_long <= 0) {
+        fprintf(stderr, "Erro: número de threads inválido\n");
+        return 1;
+    }
+    int num_threads = (int) threads_long;
 
     //unsigned char nao tem sinal, sou seja vai de 0 a 255,
     unsigned char *pixels = malloc(largura * altura * sizeof(unsigned char));
@@ -261,7 +291,7 @@ int main(int argc, char *argv[]) {
     mandelbrot_serial(pixels, largura, altura, max_num_interacoes);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
-    fprintf(times_file, "Serial: %f\n", tempo);
+    fprintf(times_file, "Serial: %fs\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_serial.pgm", pixels, largura, altura)) {
         free(pixels);
@@ -274,7 +304,7 @@ int main(int argc, char *argv[]) {
     mandelbrot_openmp(pixels, largura, altura, max_num_interacoes, num_threads);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
-    fprintf(times_file, "OpenMP: %f\n", tempo);
+    fprintf(times_file, "OpenMP: %fs\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_openmp.pgm", pixels, largura, altura)) {
         free(pixels);
@@ -287,7 +317,7 @@ int main(int argc, char *argv[]) {
     mandelbrot_pthreads1(pixels, largura, altura, max_num_interacoes, num_threads);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
-    fprintf(times_file, "Pthreads1: %f\n", tempo);
+    fprintf(times_file, "Pthreads1: %fs\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_pthreads1.pgm", pixels, largura, altura)) {
         free(pixels);
@@ -300,7 +330,7 @@ int main(int argc, char *argv[]) {
     mandelbrot_pthreads2(pixels, largura, altura, max_num_interacoes, num_threads);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
-    fprintf(times_file, "Pthreads2: %f\n", tempo);
+    fprintf(times_file, "Pthreads2: %fs\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_pthreads2.pgm", pixels, largura, altura)) {
         free(pixels);
