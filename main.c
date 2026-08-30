@@ -33,8 +33,8 @@ void mandelbrot_serial(unsigned char *pixels, int largura, int altura, int max_n
         for(int coluna = 0; coluna < largura; coluna++){
 
             //calculo do c desse pixel
-            double cr = -2.0 + (coluna / (double)(largura - 1)) * 3.0;
-            double ci = -1.5 + (linha / (double)(altura - 1)) * 3.0;
+            double cr = -2.0 + (coluna / (double)largura) * 3.0;
+            double ci = -1.5 + (linha / (double)altura) * 3.0;
 
             //zera as variaves
             double zr = 0, zi = 0;
@@ -63,8 +63,8 @@ void mandelbrot_openmp(unsigned char *pixels, int largura, int altura, int max_n
         for(int coluna = 0; coluna < largura; coluna++){
 
             //calculo do c desse pixel
-            double cr = -2.0 + (coluna / (double)(largura - 1)) * 3.0;
-            double ci = -1.5 + (linha / (double)(altura - 1)) * 3.0;
+            double cr = -2.0 + (coluna / (double)largura) * 3.0;
+            double ci = -1.5 + (linha / (double)altura) * 3.0;
 
             //zera as variaves
             double zr = 0, zi = 0;
@@ -113,8 +113,8 @@ void *calcula_bloco(void *arg) {
     for (int linha = args->linha_inicio; linha < args->linha_fim; linha++) {
         for (int coluna = 0; coluna < args->largura; coluna++) {
 
-            double cr = -2.0 + (coluna / (double)(args->largura - 1)) * 3.0;
-            double ci = -1.5 + (linha / (double)(args->altura - 1)) * 3.0;
+            double cr = -2.0 + (coluna / (double)args->largura) * 3.0;
+            double ci = -1.5 + (linha / (double)args->altura) * 3.0;
 
             double zr = 0, zi = 0;
             int num_interacoes = 0;
@@ -174,8 +174,8 @@ void *calcula_dinamico(void *arg) {
         // AQUI: só o for de COLUNA, usando a "linha" que já veio do contador
         for (int coluna = 0; coluna < args->largura; coluna++) {
 
-            double cr = -2.0 + (coluna / (double)(args->largura - 1)) * 3.0;
-            double ci = -1.5 + (linha / (double)(args->altura - 1)) * 3.0;
+            double cr = -2.0 + (coluna / (double)args->largura) * 3.0;
+            double ci = -1.5 + (linha / (double)args->altura) * 3.0;
 
             double zr = 0, zi = 0;
             int num_interacoes = 0;
@@ -261,7 +261,7 @@ int main(int argc, char *argv[]) {
     mandelbrot_serial(pixels, largura, altura, max_num_interacoes);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
-    fprintf(times_file, "Serial: %f segundos\n", tempo);
+    fprintf(times_file, "Serial: %f\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_serial.pgm", pixels, largura, altura)) {
         free(pixels);
@@ -274,7 +274,7 @@ int main(int argc, char *argv[]) {
     mandelbrot_openmp(pixels, largura, altura, max_num_interacoes, num_threads);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
-    fprintf(times_file, "OpenMP: %f segundos\n", tempo);
+    fprintf(times_file, "OpenMP: %f\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_openmp.pgm", pixels, largura, altura)) {
         free(pixels);
@@ -287,7 +287,7 @@ int main(int argc, char *argv[]) {
     mandelbrot_pthreads1(pixels, largura, altura, max_num_interacoes, num_threads);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
-    fprintf(times_file, "Pthreads1: %f segundos\n", tempo);
+    fprintf(times_file, "Pthreads1: %f\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_pthreads1.pgm", pixels, largura, altura)) {
         free(pixels);
@@ -300,7 +300,7 @@ int main(int argc, char *argv[]) {
     mandelbrot_pthreads2(pixels, largura, altura, max_num_interacoes, num_threads);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     tempo = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
-    fprintf(times_file, "Pthreads2: %f segundos\n", tempo);
+    fprintf(times_file, "Pthreads2: %f\n", tempo);
 
     if (!save_pgm("mandelbrot_jrxs_pthreads2.pgm", pixels, largura, altura)) {
         free(pixels);
