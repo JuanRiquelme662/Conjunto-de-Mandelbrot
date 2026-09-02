@@ -828,4 +828,50 @@ Pthreads2: 0.023191 segundos
 OpenMP: 0.000187s
 Pthreads1: 0.000366s
 Pthreads2: 0.000256s
-[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m$ [7mcat times.txt[27mcat times.txt
+[?2004lSerial: 0.000016s
+OpenMP: 0.000187s
+Pthreads1: 0.000366s
+Pthreads2: 0.000256s
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ 
+Script done on 2026-08-30 21:05:33-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-09-02 17:55:05-03:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="190" LINES="12"]
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7mdate[27mdate
+[?2004lWed Sep  2 17:55:12 -03 2026
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7mwhoami[27mwhoami
+[?2004lmito
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7mpwd[27mpwd
+[?2004l/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ pwdwhoami[2Pdatecat times.txt./mandelbrot 10 10 50 2[1@abc[C[C[C[C[C[C[C[C[1P-5[C[C[C[C[C[C[C[C[1@10x[C[C[C[C[C[C[C[Cgcc -fopenmp -lpthread main.c -o mandelbrot[20P./mandelbrot 4 4 50 1 1[Kgcc -fopenmp -lpthread main.c -o mandelbrot[21P./mandelbrot 10 6 40 4gcc -fopenmp -lpthread main.c -o mandelbrot
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ gcc -fopenmp -lpthread main.c -o mandelbrot[Kmake
+[?2004lmake: Nothing to be done for 'all'.
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make[K[K[K[K[7m./mandelbrot 10 10 50 2[27m./mandelbrot 10 10 50 2
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ ./mandelbrot 10 10 50 2
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make clean
+[?2004lrm -f mandelbrot *.pgm times.txt
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make
+[?2004lgcc -Wall -O2 main.c -o mandelbrot -fopenmp -lpthread
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make clean./mandelbrot 10 10 50 2
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make clear[Kn
+[?2004lrm -f mandelbrot *.pgm times.txt
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make
+[?2004lgcc -Wall -O2 main.c -o mandelbrot -fopenmp -lpthread
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make clean./mandelbrot 10 10 50 2
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ ./mandelbrot 10 10 50 2make[K
+[?2004lmake: Nothing to be done for 'all'.
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make./mandelbrot 10 10 50 2
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make clean
+[?2004lrm -f mandelbrot *.pgm times.txt
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make clean./mandelbrot 10 10 50 2
+[?2004lbash: ./mandelbrot: No such file or directory
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ ./mandelbrot 10 10 50 2[13Pmake clean./mandelbrot 10 10 50 2make[K./mandelbrot 10 10 50 2make[K
+[?2004lgcc -Wall -O2 main.c -o mandelbrot -fopenmp -lpthread
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make./mandelbrot 10 10 50 2
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make clena[K[Kan
+[?2004lrm -f mandelbrot *.pgm times.txt
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ make
+[?2004lgcc -Wall -O2 main.c -o mandelbrot -fopenmp -lpthread
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [7m./mandelbrot 800 600 100 4[27m./mandelbrot 800 600 100 4
+[?2004l[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [K]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [K]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ [K]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$ diff [K[K[K[K[Kmake clean
+[?2004lrm -f mandelbrot *.pgm times.txt
+[?2004h]0;mito@JUAN-PC: /mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[01;32mmito@JUAN-PC[00m:[01;34m/mnt/c/Users/Mito/Desktop/repositorios/Pong-Champs/Conjunto-de-Mandelbrot[00m$

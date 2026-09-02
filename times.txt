@@ -1,4 +1,0 @@
-Serial: 0.000016s
-OpenMP: 0.000187s
-Pthreads1: 0.000366s
-Pthreads2: 0.000256s
