@@ -92,7 +92,7 @@ int save_pgm(const char *filename, unsigned char *pixels, int largura, int altur
     FILE *f = fopen(filename, "w");
     if (f == NULL) {
         fprintf(stderr, "Erro: falha ao criar o arquivo %s\n", filename);
-        return 0; // falhou
+        return 0;
     }
 
     for (int linha = 0; linha < altura; linha++) {
@@ -103,7 +103,7 @@ int save_pgm(const char *filename, unsigned char *pixels, int largura, int altur
     }
 
     fclose(f);
-    return 1; // sucesso
+    return 1; 
 }
 
 //void* porque e um ponteiro generico (de qualquer tipo)
